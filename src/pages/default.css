@@ -1,0 +1,13 @@
+body{
+	padding: 24px;
+	// box-sizing: content-box;
+}
+
+#root {
+	//width: 100vh;
+	height: calc(100vh - 48px);
+}
+
+.tsqd-open-btn-container{
+	display:none !important;
+}

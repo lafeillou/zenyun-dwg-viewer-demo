@@ -1,0 +1,38 @@
+#d3-svg-dom-element .grid-line {
+  fill: #e8e8e8;
+  stroke: #e8e8e8;
+  stroke-width: 0.5px;
+}
+
+#d3-svg-dom-element g.x-axis g.tick {
+	fill: #e8e8e8;
+  stroke: #e8e8e8;
+  stroke-width: 0.5px;
+}
+
+#d3-svg-dom-element g.x-axis g.tick line{
+	fill: #e8e8e8;
+  stroke: #e8e8e8;
+  stroke-width: 0.5px;
+}
+
+#d3-svg-dom-element g.x-axis .domain {
+	stroke: #e8e8e8;
+	stroke-width: 0.5px;
+}
+#d3-svg-dom-element g.y-axis g.tick {
+	fill: #e8e8e8;
+  stroke: #e8e8e8;
+  stroke-width: 0.5px;
+}
+
+#d3-svg-dom-element g.y-axis .domain {
+	stroke: #e8e8e8;
+	stroke-width: 0.5px;
+}
+
+#d3-svg-dom-element g.y-axis g.tick line{
+	fill: #e8e8e8;
+  stroke: #e8e8e8;
+  stroke-width: 0.5px;
+}
