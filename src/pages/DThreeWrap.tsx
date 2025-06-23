@@ -9,7 +9,7 @@ export default function DThreeWrap({
 	marginRight=0,
 	marginBottom=24,
 	marginLeft=32,
-	setTransform,
+	// setTransform,
 }) {
 
 	const gx = useRef();
@@ -25,9 +25,9 @@ export default function DThreeWrap({
 		// svgRef.current.attr("transform", transform);
 		svgRef.current
 		.select('svg')
-	  .attr("transform", transform);
+	  	.attr("transform", transform);
 		const zx = transform.rescaleX(x);
-    const zy = transform.rescaleY(y); //.interpolate(d3.interpolateRound);
+    	const zy = transform.rescaleY(y); //.interpolate(d3.interpolateRound);
 		d3.select(gx.current).call(d3.axisBottom(zx));
 		d3.select(gy.current).call(d3.axisLeft(zy));
 		svgRef.current.selectAll("g.x-axis g.tick")
@@ -47,14 +47,14 @@ export default function DThreeWrap({
 
 		// 去掉defs
 		// svgRef.current.select('#example1').attr('transform',null).attr('transform-origin', 0 + 'px ' + 0 + 'px');
-    svgRef.current.select('#example1').attr('viewBox', null);
+    	svgRef.current.select('#example1').attr('viewBox', null);
 		svgRef.current.select('#example1').attr('preserveAspectRatio', 'none');
 		// svgRef.current.select('#example1').attr("transform", transform);
 		svgRef.current.select('#example1').select('defs').remove();
 		svgRef.current.select('#example1').select('g').attr('transform', null)
 		const innerSvg = svgRef.current.select('#example1').select('g').select('g')
 		innerSvg.attr("transform", transform);
-    setTransform(transform)
+        // setTransform(transform)
 	}
 
 	
@@ -62,13 +62,13 @@ export default function DThreeWrap({
 	useEffect(() => {
 		svgRef.current = d3.select('#d3-svg-dom-element');
 		const zoom = d3.zoom()
-      // .extent([[0, 0], [width - marginRight, height - marginBottom]])
-      .scaleExtent([1, 100])
-      .on("zoom", zoomed);
+		// .extent([[0, 0], [width - marginRight, height - marginBottom]])
+		.scaleExtent([1, 100])
+		.on("zoom", zoomed);
 
 		svgRef.current
-			.call(zoom)
-			.call(zoom.transform, d3.zoomIdentity);
+		.call(zoom)
+		.call(zoom.transform, d3.zoomIdentity);
 		// svgRef.current
 		// .select('#example1')
 		// .select('#*Model_Space')
@@ -95,18 +95,17 @@ export default function DThreeWrap({
 				d3.zoomIdentity.translate(width / 2, height / 2).scale(40).translate(-x, -y),
 				d3.pointer(event)
 			);
-  }	
+  		}
 
 	}, [width, height]);
 
 	useEffect( () => {
-
 		svgRef.current.select('#example1').attr('viewBox', null);
 		svgRef.current.select('#example1').attr('preserveAspectRatio', 'none');
 		// svgRef.current.select('#example1').attr("transform", transform);
 		svgRef.current.select('#example1').select('defs').remove();
 		svgRef.current.select('#example1').select('g').attr('transform', null);
-    // const innerSvg = svgRef.current.select('#example1').select('g').select('g')
+    	// const innerSvg = svgRef.current.select('#example1').select('g').select('g')
 		// innerSvg.attr("transform", `translate(${width / 2},${height / 2}) scale(${21})`);
 
 		d3.select(gx.current).call(d3.axisBottom(x));

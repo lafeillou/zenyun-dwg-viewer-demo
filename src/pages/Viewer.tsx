@@ -20,6 +20,7 @@ let libredwg = null;
 export function Viewer() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const svgRef = useRef<SVGSVGElement>(null);
+	const [jsonModel, setJsonModel] = useState(null);
 	const [d3wrap, setD3Wrap] = useState({
 		width: 640,
 		height: 400,
@@ -68,37 +69,36 @@ export function Viewer() {
 						const db = libredwg.convert(dwg);
 						const model = libredwg.convert(dwg);
 						editor.set(model); //json展示
+						setJsonModel(model); // 传递解析出来的json数据
 						// svg展示
-						const svgString = libredwg.dwg_to_svg(db);
-						console.log("===svgString");
-						console.log(svgString);
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(svgString, 'image/svg+xml');
-            const svg = doc.documentElement
-					
-            svgRef.current && d3.select(svgRef.current).appendChild(svg);
-						d3.select('#d3-svg-dom-element').append(() => svg).attr('id','example1');
-						d3.select('#example1').select('defs').remove();
-						const innerSvg = d3.select('#example1').select('g').select('g');
-						console.log("====innerSvg");
-						console.log(innerSvg);
-						innerSvg.selectAll('g')
-						// .attr('stroke', 'red')
-						.call(d3.drag()
-						.on("start", dragstarted)
-						.on("drag", dragged)
-						.on("end", dragended));
-
+						// const svgString = libredwg.dwg_to_svg(db);
+						// console.log("===svgString");
+						// console.log(svgString);
+						// const parser = new DOMParser();
+						// const doc = parser.parseFromString(svgString, 'image/svg+xml');
+						// const svg = doc.documentElement
+            			// svgRef.current && d3.select(svgRef.current).appendChild(svg);
+						// d3.select('#d3-svg-dom-element').append(() => svg).attr('id','example1');
+						// d3.select('#example1').select('defs').remove();
+						// const innerSvg = d3.select('#example1').select('g').select('g');
+						// console.log("====innerSvg");
+						// console.log(innerSvg);
+						// innerSvg.selectAll('g')
+						// // .attr('stroke', 'red')
+						// .call(d3.drag()
+						// .on("start", dragstarted)
+						// .on("drag", dragged)
+						// .on("end", dragended));
 						// 转换dwg为json格式，继续转换为svg格式
 						console.log("====Helper");
 						console.log(Helper);
 						const helper = new Helper(model);
 						// //json格式
-         		console.log(helper.parsed, 'json格式');
-         		// //svg  格式
-         		// console.log('parsed:', helper.toSVG()) // 对 dxf有效
-         		// //webgl 所用格式
-         		// console.log('polylines:', helper.toPolylines()) // 对 dxf有效
+         				console.log(helper.parsed, 'json格式');
+						// //svg  格式
+						// console.log('parsed:', helper.toSVG()) // 对 dxf有效
+						// //webgl 所用格式
+						// console.log('polylines:', helper.toPolylines()) // 对 dxf有效
 						libredwg.dwg_free(dwg);
 					} catch (error) {
 						console.error('Failed to process dwg file: ', error);
@@ -167,7 +167,7 @@ export function Viewer() {
         </div>
 
 				<div className="h-full " id="d3-svg-wrap">
-          <DThreeWrap width={d3wrap.width} height={d3wrap.height} ref={svgRef} setTransform={setTransform}/>
+          <DThreeWrap width={d3wrap.width} height={d3wrap.height} ref={svgRef}  json={jsonModel}/>
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
